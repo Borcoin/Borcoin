@@ -55,7 +55,7 @@
 
   <div id="keyboard"></div>
 
-  <button id="next-round-btn" onclick="nextRound()">Próxima Rodada</button>
+  <button id="next-round-btn" onclick="location.reload()">Próxima Rodada</button>
 
   <script>
     const answers = [
@@ -109,6 +109,11 @@
       } else {
         incorrectGuesses.push(letter);
         totalScore -= 1; // Perde 1 ponto por letra incorreta
+
+        // Se atingir 5 letras erradas, mostra o botão "Próxima Rodada"
+        if (incorrectGuesses.length === 5) {
+          showNextRoundButton();
+        }
       }
 
       displayWord();
@@ -116,16 +121,13 @@
       displayScore();
       displayIncorrectGuesses();
 
-      if (!guessedWord.includes("_") || incorrectGuesses.length === 6) {
+      // Salva a pontuação no localStorage a cada jogada
+      localStorage.setItem("totalScore", totalScore);
+
+      if (!guessedWord.includes("_") || incorrectGuesses.length === 5) {
+        // Se o jogo terminar, não esconde o botão "Próxima Rodada"
         showNextRoundButton();
       }
-    }
-
-    function nextRound() {
-      hideNextRoundButton();
-      totalScore = 0;
-      localStorage.setItem("totalScore", totalScore);
-      startGame();
     }
 
     function renderKeyboard() {
