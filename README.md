@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,6 +48,7 @@
     let recargas = localStorage.getItem('recargas') || 0;
     let niveis = 20;
     let recargasPorNivel = 10;
+    let nivelAtual = localStorage.getItem('nivelAtual') || 1;
 
     function atualizarCronometro() {
       const minutos = Math.floor(tempoRestante / 60);
@@ -70,7 +72,7 @@
         
         // Verificar se é hora de avançar para o próximo nível
         if (recargas >= recargasPorNivel) {
-          avancarProximoNivel();
+          passarProximoNivel();
         }
       } else {
         document.getElementById('mensagem').innerText = 'Espere o cronômetro zerar para coletar novamente.';
@@ -82,7 +84,7 @@
       atualizarCronometro();
     }
 
-    function avancarProximoNivel() {
+    function passarProximoNivel() {
       // Reduzir bônus acumulado para o próximo nível
       diamantesColetados *= 0.99;
       localStorage.setItem('diamantesColetados', diamantesColetados);
@@ -90,8 +92,13 @@
       // Reiniciar contagem de recargas
       recargas = 0;
       localStorage.setItem('recargas', recargas);
+
+      // Avançar para o próximo nível
+      nivelAtual++;
+      localStorage.setItem('nivelAtual', nivelAtual);
       
-      alert('Parabéns! Avançou para o próximo nível.');
+      // Recarregar a página automaticamente
+      location.reload();
     }
 
     function iniciarContagemRegressiva() {
@@ -110,7 +117,7 @@
     function exibirNiveis() {
       const listaNiveis = document.getElementById('listaNiveis');
       listaNiveis.innerHTML = '';
-      for (let i = 1; i <= niveis; i++) {
+      for (let i = nivelAtual; i <= niveis; i++) {
         const bonus = (i * -1).toFixed(2);
         const item = document.createElement('li');
         item.textContent = `Nível ${i}: Bônus de ${bonus}% no cronômetro`;
