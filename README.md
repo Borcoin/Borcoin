@@ -148,5 +148,15 @@
     displayIncorrectGuesses();
     renderKeyboard();
   </script>
+  <script type="text/javascript">
+	atOptions = {
+		'key' : '32a3921042f800091bb1ad96c37de5a0',
+		'format' : 'iframe',
+		'height' : 50,
+		'width' : 320,
+		'params' : {}
+	};
+	document.write('<scr' + 'ipt type="text/javascript" src="//www.topcreativeformat.com/32a3921042f800091bb1ad96c37de5a0/invoke.js"></scr' + 'ipt>');
+</script>
 </body>
 </html>
