@@ -17,6 +17,10 @@
       right: 10px;
       font-size: 18px;
     }
+
+    #niveis {
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
@@ -32,10 +36,17 @@
   <p id="mensagem"></p>
   <p id="pontuacao">Pontuação: <span id="pontuacaoValor">0</span></p>
 
+  <div id="niveis">
+    <h3>Níveis</h3>
+    <ul id="listaNiveis"></ul>
+  </div>
+
   <script>
     let tempoRestante = localStorage.getItem('tempoRestante') || 900; // 15 minutos em segundos
     let diamantesColetados = localStorage.getItem('diamantesColetados') || 0;
     let recargas = localStorage.getItem('recargas') || 0;
+    let niveis = 20;
+    let recargasPorNivel = 10;
 
     function atualizarCronometro() {
       const minutos = Math.floor(tempoRestante / 60);
@@ -58,7 +69,7 @@
         atualizarPontuacao();
         
         // Verificar se é hora de avançar para o próximo nível
-        if (recargas >= 100) {
+        if (recargas >= recargasPorNivel) {
           avancarProximoNivel();
         }
       } else {
@@ -72,6 +83,10 @@
     }
 
     function avancarProximoNivel() {
+      // Reduzir bônus acumulado para o próximo nível
+      diamantesColetados *= 0.99;
+      localStorage.setItem('diamantesColetados', diamantesColetados);
+      
       // Reiniciar contagem de recargas
       recargas = 0;
       localStorage.setItem('recargas', recargas);
@@ -92,10 +107,22 @@
       }, 1000);
     }
 
+    function exibirNiveis() {
+      const listaNiveis = document.getElementById('listaNiveis');
+      listaNiveis.innerHTML = '';
+      for (let i = 1; i <= niveis; i++) {
+        const bonus = (i * -1).toFixed(2);
+        const item = document.createElement('li');
+        item.textContent = `Nível ${i}: Bônus de ${bonus}% no cronômetro`;
+        listaNiveis.appendChild(item);
+      }
+    }
+
     // Iniciar o cronômetro quando a página carregar
     window.onload = function() {
       iniciarContagemRegressiva();
       atualizarPontuacao();
+      exibirNiveis();
     };
   </script>
 
