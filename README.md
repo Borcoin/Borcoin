@@ -3,159 +3,188 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jogo de Coleta de Diamantes</title>
+  <title>Jogo da Velha</title>
   <style>
-    header {
+    td {
+      width: 50px;
+      height: 50px;
       text-align: center;
-      padding: 20px;
-      background-color: #f0f0f0;
-    }
-
-    #pontuacao {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 18px;
-    }
-
-    #niveis {
-      margin-top: 20px;
-    }
-
-    #passarNivelBtn {
-      margin-top: 10px;
+      border: 1px solid #000;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Anúncio Importante!</h1>
-    <p>Divirta-se coletando diamantes!</p>
-  </header>
+<h1>Jogo da Velha</h1>
+<p>Placar: <span id="playerX">0</span> - <span id="playerO">0</span></p>
+<p>Escolha a dificuldade:
+  <select id="difficulty" onchange="changeDifficulty()">
+    <option value="easy">Fácil</option>
+    <option value="medium">Médio</option>
+    <option value="hard">Difícil</option>
+  </select>
+</p>
 
-  <h2>Jogo de Coleta de Diamantes</h2>
-  <p id="timer">Tempo restante: <span id="countdown">15:00</span></p>
-  <button onclick="coletarDiamante()">Coletar Diamante</button>
-  <button id="passarNivelBtn" onclick="cliqueEPasse()">Clique e Passe para o Próximo Nível</button>
-  <p id="mensagem"></p>
-  <p id="pontuacao">Pontuação: <span id="pontuacaoValor">0</span></p>
+<table>
+  <tr>
+    <td onclick="play(this)"></td>
+    <td onclick="play(this)"></td>
+    <td onclick="play(this)"></td>
+  </tr>
+  <tr>
+    <td onclick="play(this)"></td>
+    <td onclick="play(this)"></td>
+    <td onclick="play(this)"></td>
+  </tr>
+  <tr>
+    <td onclick="play(this)"></td>
+    <td onclick="play(this)"></td>
+    <td onclick="play(this)"></td>
+  </tr>
+</table>
 
-  <div id="niveis">
-    <h3>Níveis</h3>
-    <p id="nivelAtual">Nível Atual: 1</p>
-    <ul id="listaNiveis"></ul>
-  </div>
+<script>
+  let currentPlayer = 'X';
+  let playerXScore = 0;
+  let playerOScore = 0;
+  let difficulty = 'easy'; // Default difficulty
 
-  <script>
-    let tempoInicial = 900; // 15 minutos em segundos
-    let tempoRestante = localStorage.getItem('tempoRestante') || tempoInicial;
-    let diamantesColetados = localStorage.getItem('diamantesColetados') || 0;
-    let recargas = localStorage.getItem('recargas') || 0;
-    let niveis = 20;
-    let recargasPorNivel = 10;
-    let nivelAtual = localStorage.getItem('nivelAtual') || 1;
-    let cliques = localStorage.getItem('cliques') || 0;
-
-    function atualizarCronometro() {
-      const minutos = Math.floor(tempoRestante / 60);
-      const segundos = tempoRestante % 60;
-      document.getElementById('countdown').innerText = `${minutos}:${segundos < 10 ? '0' : ''}${segundos}`;
-    }
-
-    function atualizarPontuacao() {
-      document.getElementById('pontuacaoValor').innerText = diamantesColetados.toFixed(2); // Fixar para dois decimais
-    }
-
-    function coletarDiamante() {
-      if (tempoRestante === 0) {
-        let bonusPercentual = 1 - (recargas * 0.01); // Bônus acumulado para o cronômetro
-        tempoRestante = Math.ceil(tempoInicial * bonusPercentual); // Reiniciar o cronômetro com bônus
-        diamantesColetados += 2 + (diamantesColetados * 0.01); // Bônus acumulado para a pontuação
-        localStorage.setItem('diamantesColetados', diamantesColetados);
-        document.getElementById('mensagem').innerText = 'Diamantes coletados! Reiniciando o cronômetro.';
-        reiniciarCronometro();
-        atualizarPontuacao();
-        
-        // Verificar se é hora de avançar para o próximo nível
-        if (recargas >= recargasPorNivel) {
-          document.getElementById('passarNivelBtn').disabled = false;
-        }
+  function play(cell) {
+    if (!cell.innerHTML) {
+      cell.innerHTML = currentPlayer;
+      if (checkWinner()) {
+        alert(currentPlayer + " venceu!");
+        updateScore();
+        resetBoard();
+      } else if (isBoardFull()) {
+        alert("Empate!");
+        resetBoard();
       } else {
-        document.getElementById('mensagem').innerText = 'Espere o cronômetro zerar para coletar novamente.';
-      }
-    }
-
-    function reiniciarCronometro() {
-      localStorage.setItem('tempoRestante', tempoRestante);
-      atualizarCronometro();
-    }
-
-    function cliqueEPasse() {
-      cliques++;
-      localStorage.setItem('cliques', cliques);
-
-      if (cliques % 10 === 0) {
-        passarProximoNivel();
-      }
-    }
-
-    function passarProximoNivel() {
-      // Reduzir bônus acumulado para o próximo nível
-      diamantesColetados *= 0.99;
-      localStorage.setItem('diamantesColetados', diamantesColetados);
-      
-      // Reiniciar contagem de recargas
-      recargas = 0;
-      localStorage.setItem('recargas', recargas);
-
-      // Avançar para o próximo nível
-      nivelAtual++;
-      localStorage.setItem('nivelAtual', nivelAtual);
-
-      // Ajustar o tempo inicial para o próximo nível
-      tempoInicial = Math.ceil(tempoInicial * 0.99);
-      localStorage.setItem('tempoInicial', tempoInicial);
-      
-      document.getElementById('passarNivelBtn').disabled = true;
-      
-      document.getElementById('nivelAtual').innerText = `Nível Atual: ${nivelAtual}`;
-      
-      alert(`Parabéns! Avançou para o Nível ${nivelAtual}.`);
-      exibirNiveis();
-    }
-
-    function iniciarContagemRegressiva() {
-      setInterval(function() {
-        if (tempoRestante > 0) {
-          tempoRestante--;
-          localStorage.setItem('tempoRestante', tempoRestante);
-          atualizarCronometro();
-        } else {
-          recargas++; // Incrementar a contagem de recargas
-          localStorage.setItem('recargas', recargas);
+        currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
+        if (currentPlayer === 'O') {
+          setTimeout(robotPlay, 500); // Adiciona um atraso para a jogada do robô
         }
-      }, 1000);
+      }
     }
+  }
 
-    function exibirNiveis() {
-      const listaNiveis = document.getElementById('listaNiveis');
-      listaNiveis.innerHTML = '';
-      for (let i = nivelAtual; i <= niveis; i++) {
-        const bonus = (i * -1).toFixed(2);
-        const item = document.createElement('li');
-        item.textContent = `Nível ${i}: Bônus de ${bonus}% no cronômetro`;
-        listaNiveis.appendChild(item);
+  function robotPlay() {
+    const emptyCells = document.querySelectorAll('td:empty');
+    if (emptyCells.length > 0) {
+      let robotCell;
+
+      if (difficulty === 'easy') {
+        robotCell = getRandomEmptyCell(emptyCells);
+      } else if (difficulty === 'medium') {
+        robotCell = getMediumDifficultyMove(emptyCells);
+      } else if (difficulty === 'hard') {
+        // Adicione aqui a lógica para o modo difícil
+        // Por exemplo, pode usar um algoritmo minimax
+        robotCell = getHardDifficultyMove(emptyCells);
+      }
+
+      robotCell.innerHTML = 'O';
+      if (checkWinner()) {
+        alert("O robô venceu!");
+        updateScore();
+        resetBoard();
+      } else if (isBoardFull()) {
+        alert("Empate!");
+        resetBoard();
+      } else {
+        currentPlayer = 'X';
+      }
+    }
+  }
+
+  function getRandomEmptyCell(cells) {
+    const randomIndex = Math.floor(Math.random() * cells.length);
+    return cells[randomIndex];
+  }
+
+  function getMediumDifficultyMove(cells) {
+    // Lógica para um movimento médio (pode ser melhorada)
+    return getRandomEmptyCell(cells);
+  }
+
+  function getHardDifficultyMove(cells) {
+    // Adicione aqui a lógica para o modo difícil usando um algoritmo minimax
+    // Exemplo básico:
+    return minimax(cells, currentPlayer).index;
+  }
+
+  function minimax(cells, player) {
+    // Implemente o algoritmo minimax aqui para o modo difícil
+    // Retorna um objeto com { score, index }
+    // score: 10 se o jogador ganhar, -10 se perder, 0 se empate
+    // index: índice da célula escolhida
+    // Exemplo básico:
+    const scores = [];
+    const moves = [];
+
+    for (let i = 0; i < cells.length; i++) {
+      if (cells[i].innerHTML === '') {
+        cells[i].innerHTML = player;
+        const score = minimaxScore(cells, 0, false);
+        cells[i].innerHTML = '';
+
+        scores.push(score);
+        moves.push(i);
       }
     }
 
-    // Iniciar o cronômetro quando a página carregar
-    window.onload = function() {
-      iniciarContagemRegressiva();
-      atualizarPontuacao();
-      exibirNiveis();
-    };
-  </script>
+    const bestMoveIndex = (player === 'O') ? moves[scores.indexOf(Math.max(...scores))] : moves[scores.indexOf(Math.min(...scores))];
+    return { score: scores[bestMoveIndex], index: bestMoveIndex };
+  }
+
+  function minimaxScore(cells, depth, isMaximizing) {
+    // Implemente a função de avaliação para o minimax aqui
+    // Retorna 10 se o jogador 'O' ganhar, -10 se 'X' ganhar, 0 se empate
+    // Considere a profundidade para penalizar movimentos mais longos
+    // Exemplo básico:
+    if (checkWinner()) {
+      return (currentPlayer === 'O') ? 10 - depth : -10 + depth;
+    } else if (isBoardFull()) {
+      return 0;
+    }
+
+    const scores = [];
+
+    for (let i = 0; i < cells.length; i++) {
+      if (cells[i].innerHTML === '') {
+        cells[i].innerHTML = (isMaximizing) ? 'O' : 'X';
+        const score = minimaxScore(cells, depth + 1, !isMaximizing);
+        cells[i].innerHTML = '';
+
+        scores.push(score);
+      }
+    }
+
+    return (isMaximizing) ? Math.max(...scores) : Math.min(...scores);
+  }
+
+  function checkWinner() {
+    // ... (mesmo código de verificação de vencedor)
+  }
+
+  function isBoardFull() {
+    // ... (mesmo código de verificação de tabuleiro cheio)
+  }
+
+  function updateScore() {
+    // ... (mesmo código de atualização do placar)
+  }
+
+  function resetBoard() {
+    // ... (mesmo código de reinicialização do tabuleiro)
+  }
+
+  function changeDifficulty() {
+    difficulty = document.getElementById('difficulty').value;
+    resetBoard();
+  }
+</script>
 
 </body>
 </html>
