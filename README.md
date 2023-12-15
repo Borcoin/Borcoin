@@ -32,7 +32,16 @@
             cursor: pointer;
         }
     </style>
-    <script type='text/javascript' src='//pl21788676.toprevenuegate.com/21/c8/05/21c8059ac7a730f835550879cf3d7a36.js'></script>
+    <script type="text/javascript">
+	atOptions = {
+		'key' : 'f174b822b902ac519112de39d7f637ca',
+		'format' : 'iframe',
+		'height' : 250,
+		'width' : 300,
+		'params' : {}
+	};
+	document.write('<scr' + 'ipt type="text/javascript" src="//www.topcreativeformat.com/f174b822b902ac519112de39d7f637ca/invoke.js"></scr' + 'ipt>');
+</script>
 </head>
 <body>
     <h1>Jogo da Forca</h1>
