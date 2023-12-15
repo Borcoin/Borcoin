@@ -32,6 +32,7 @@
             cursor: pointer;
         }
     </style>
+    <script type='text/javascript' src='//pl21788676.toprevenuegate.com/21/c8/05/21c8059ac7a730f835550879cf3d7a36.js'></script>
 </head>
 <body>
     <h1>Jogo da Forca</h1>
