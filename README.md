@@ -38,6 +38,11 @@
       font-size: 16px;
       cursor: pointer;
     }
+
+    #next-round-btn {
+      display: none;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
@@ -50,7 +55,7 @@
 
   <div id="keyboard"></div>
 
-  <button onclick="nextRound()">Próxima Rodada</button>
+  <button id="next-round-btn" onclick="nextRound()">Próxima Rodada</button>
 
   <script>
     const answers = [
@@ -100,16 +105,13 @@
       displayIncorrectGuesses();
 
       if (!guessedWord.includes("_")) {
-        alert(`Parabéns! Você ganhou com uma pontuação de ${totalScore} pontos!`);
-        nextRound();
+        document.getElementById("next-round-btn").style.display = "block";
       } else if (incorrectGuesses.length === 6) {
-        alert(`Você perdeu! A resposta era "${currentAnswer.word}". Sua pontuação nesta rodada foi ${totalScore} pontos.`);
-        nextRound();
+        document.getElementById("next-round-btn").style.display = "block";
       }
     }
 
     function nextRound() {
-      // Adiciona a linha abaixo para recarregar a página automaticamente
       window.location.reload();
     }
 
