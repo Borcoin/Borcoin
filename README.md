@@ -37,22 +37,25 @@
   <h2>Jogo de Coleta de Diamantes</h2>
   <p id="timer">Tempo restante: <span id="countdown">15:00</span></p>
   <button onclick="coletarDiamante()">Coletar Diamante</button>
-  <button id="passarNivelBtn" onclick="passarProximoNivel()">Clique e Passe para o Próximo Nível</button>
+  <button id="passarNivelBtn" onclick="cliqueEPasse()">Clique e Passe para o Próximo Nível</button>
   <p id="mensagem"></p>
   <p id="pontuacao">Pontuação: <span id="pontuacaoValor">0</span></p>
 
   <div id="niveis">
     <h3>Níveis</h3>
+    <p id="nivelAtual">Nível Atual: 1</p>
     <ul id="listaNiveis"></ul>
   </div>
 
   <script>
-    let tempoRestante = localStorage.getItem('tempoRestante') || 900; // 15 minutos em segundos
+    let tempoInicial = 900; // 15 minutos em segundos
+    let tempoRestante = localStorage.getItem('tempoRestante') || tempoInicial;
     let diamantesColetados = localStorage.getItem('diamantesColetados') || 0;
     let recargas = localStorage.getItem('recargas') || 0;
     let niveis = 20;
     let recargasPorNivel = 10;
     let nivelAtual = localStorage.getItem('nivelAtual') || 1;
+    let cliques = localStorage.getItem('cliques') || 0;
 
     function atualizarCronometro() {
       const minutos = Math.floor(tempoRestante / 60);
@@ -67,7 +70,7 @@
     function coletarDiamante() {
       if (tempoRestante === 0) {
         let bonusPercentual = 1 - (recargas * 0.01); // Bônus acumulado para o cronômetro
-        tempoRestante = Math.ceil(tempoRestante * bonusPercentual); // Aplicar o bônus
+        tempoRestante = Math.ceil(tempoInicial * bonusPercentual); // Reiniciar o cronômetro com bônus
         diamantesColetados += 2 + (diamantesColetados * 0.01); // Bônus acumulado para a pontuação
         localStorage.setItem('diamantesColetados', diamantesColetados);
         document.getElementById('mensagem').innerText = 'Diamantes coletados! Reiniciando o cronômetro.';
@@ -88,6 +91,15 @@
       atualizarCronometro();
     }
 
+    function cliqueEPasse() {
+      cliques++;
+      localStorage.setItem('cliques', cliques);
+
+      if (cliques % 10 === 0) {
+        passarProximoNivel();
+      }
+    }
+
     function passarProximoNivel() {
       // Reduzir bônus acumulado para o próximo nível
       diamantesColetados *= 0.99;
@@ -100,9 +112,17 @@
       // Avançar para o próximo nível
       nivelAtual++;
       localStorage.setItem('nivelAtual', nivelAtual);
+
+      // Ajustar o tempo inicial para o próximo nível
+      tempoInicial = Math.ceil(tempoInicial * 0.99);
+      localStorage.setItem('tempoInicial', tempoInicial);
       
-      // Recarregar a página automaticamente
-      location.reload();
+      document.getElementById('passarNivelBtn').disabled = true;
+      
+      document.getElementById('nivelAtual').innerText = `Nível Atual: ${nivelAtual}`;
+      
+      alert(`Parabéns! Avançou para o Nível ${nivelAtual}.`);
+      exibirNiveis();
     }
 
     function iniciarContagemRegressiva() {
