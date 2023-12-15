@@ -117,6 +117,8 @@
 
       if (!guessedWord.includes("_")) {
         document.getElementById("next-round-btn").style.display = "block";
+        // Salva a pontuação no localStorage
+        localStorage.setItem("totalScore", totalScore);
       } else if (incorrectGuesses.length === 6) {
         document.getElementById("next-round-btn").style.display = "block";
       }
@@ -124,6 +126,13 @@
 
     function nextRound() {
       document.getElementById("next-round-btn").style.display = "none";
+      // Reinicia a pontuação se o botão "Próxima Rodada" for clicado
+      totalScore = 0;
+      // Carrega a pontuação acumulada do localStorage, se existir
+      const storedScore = localStorage.getItem("totalScore");
+      if (storedScore) {
+        totalScore = parseInt(storedScore, 10);
+      }
       startGame();
     }
 
