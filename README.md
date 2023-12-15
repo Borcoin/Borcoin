@@ -1,190 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jogo da Velha</title>
-  <style>
-    td {
-      width: 50px;
-      height: 50px;
-      text-align: center;
-      border: 1px solid #000;
-      cursor: pointer;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Forca</title>
+    <style>
+        input {
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
+    <h1>Jogo de Forca</h1>
+    <p>Palavra: <span id="palavra"></span></p>
+    <p>Tentativas restantes: <span id="tentativas"></span></p>
+    <p>Letras erradas: <span id="letrasErradas"></span></p>
+    <input type="text" id="letraInput" maxlength="1">
+    <button onclick="adivinhar()">Adivinhar</button>
+    <hr>
+    <h2>Pontuações</h2>
+    <ul id="pontuacoes"></ul>
 
-<h1>Jogo da Velha</h1>
-<p>Placar: <span id="playerX">0</span> - <span id="playerO">0</span></p>
-<p>Escolha a dificuldade:
-  <select id="difficulty" onchange="changeDifficulty()">
-    <option value="easy">Fácil</option>
-    <option value="medium">Médio</option>
-    <option value="hard">Difícil</option>
-  </select>
-</p>
+    <script>
+        // Dicionário para armazenar nomes e pontuações
+        let pontuacoes = {};
 
-<table>
-  <tr>
-    <td onclick="play(this)"></td>
-    <td onclick="play(this)"></td>
-    <td onclick="play(this)"></td>
-  </tr>
-  <tr>
-    <td onclick="play(this)"></td>
-    <td onclick="play(this)"></td>
-    <td onclick="play(this)"></td>
-  </tr>
-  <tr>
-    <td onclick="play(this)"></td>
-    <td onclick="play(this)"></td>
-    <td onclick="play(this)"></td>
-  </tr>
-</table>
-
-<script>
-  let currentPlayer = 'X';
-  let playerXScore = 0;
-  let playerOScore = 0;
-  let difficulty = 'easy'; // Default difficulty
-
-  function play(cell) {
-    if (!cell.innerHTML) {
-      cell.innerHTML = currentPlayer;
-      if (checkWinner()) {
-        alert(currentPlayer + " venceu!");
-        updateScore();
-        resetBoard();
-      } else if (isBoardFull()) {
-        alert("Empate!");
-        resetBoard();
-      } else {
-        currentPlayer = (currentPlayer === 'X') ? 'O' : 'X';
-        if (currentPlayer === 'O') {
-          setTimeout(robotPlay, 500); // Adiciona um atraso para a jogada do robô
+        function carregarPontuacoes() {
+            const pontuacoesSalvas = localStorage.getItem("pontuacoes");
+            pontuacoes = pontuacoesSalvas ? JSON.parse(pontuacoesSalvas) : {};
         }
-      }
-    }
-  }
 
-  function robotPlay() {
-    const emptyCells = document.querySelectorAll('td:empty');
-    if (emptyCells.length > 0) {
-      let robotCell;
+        function salvarPontuacoes() {
+            localStorage.setItem("pontuacoes", JSON.stringify(pontuacoes));
+        }
 
-      if (difficulty === 'easy') {
-        robotCell = getRandomEmptyCell(emptyCells);
-      } else if (difficulty === 'medium') {
-        robotCell = getMediumDifficultyMove(emptyCells);
-      } else if (difficulty === 'hard') {
-        // Adicione aqui a lógica para o modo difícil
-        // Por exemplo, pode usar um algoritmo minimax
-        robotCell = getHardDifficultyMove(emptyCells);
-      }
+        function jogarForca() {
+            const palavras = ["javascript", "html", "css", "developer", "programming"];
+            const palavra = palavras[Math.floor(Math.random() * palavras.length)];
+            let tentativas = 6;
+            let palavraOculta = Array(palavra.length).fill('_');
+            let letrasErradas = [];
 
-      robotCell.innerHTML = 'O';
-      if (checkWinner()) {
-        alert("O robô venceu!");
-        updateScore();
-        resetBoard();
-      } else if (isBoardFull()) {
-        alert("Empate!");
-        resetBoard();
-      } else {
-        currentPlayer = 'X';
-      }
-    }
-  }
+            function atualizarInterface() {
+                document.getElementById("palavra").textContent = palavraOculta.join(' ');
+                document.getElementById("tentativas").textContent = tentativas;
+                document.getElementById("letrasErradas").textContent = letrasErradas.join(' ');
+            }
 
-  function getRandomEmptyCell(cells) {
-    const randomIndex = Math.floor(Math.random() * cells.length);
-    return cells[randomIndex];
-  }
+            function adivinhar() {
+                const letra = document.getElementById("letraInput").value.toLowerCase();
 
-  function getMediumDifficultyMove(cells) {
-    // Lógica para um movimento médio (pode ser melhorada)
-    return getRandomEmptyCell(cells);
-  }
+                if (!letra || !/^[a-z]$/.test(letra)) {
+                    alert("Por favor, digite uma letra válida.");
+                    return;
+                }
 
-  function getHardDifficultyMove(cells) {
-    // Adicione aqui a lógica para o modo difícil usando um algoritmo minimax
-    // Exemplo básico:
-    return minimax(cells, currentPlayer).index;
-  }
+                if (palavra.includes(letra)) {
+                    for (let i = 0; i < palavra.length; i++) {
+                        if (palavra[i] === letra) {
+                            palavraOculta[i] = letra;
+                        }
+                    }
 
-  function minimax(cells, player) {
-    // Implemente o algoritmo minimax aqui para o modo difícil
-    // Retorna um objeto com { score, index }
-    // score: 10 se o jogador ganhar, -10 se perder, 0 se empate
-    // index: índice da célula escolhida
-    // Exemplo básico:
-    const scores = [];
-    const moves = [];
+                    if (!palavraOculta.includes('_')) {
+                        alert("Parabéns! Você acertou a palavra: " + palavra);
+                        atualizarPontuacao();
+                        return;
+                    }
+                } else {
+                    letrasErradas.push(letra);
+                    tentativas--;
 
-    for (let i = 0; i < cells.length; i++) {
-      if (cells[i].innerHTML === '') {
-        cells[i].innerHTML = player;
-        const score = minimaxScore(cells, 0, false);
-        cells[i].innerHTML = '';
+                    if (tentativas === 0) {
+                        alert("Você perdeu! A palavra era: " + palavra);
+                    }
+                }
 
-        scores.push(score);
-        moves.push(i);
-      }
-    }
+                atualizarInterface();
+            }
 
-    const bestMoveIndex = (player === 'O') ? moves[scores.indexOf(Math.max(...scores))] : moves[scores.indexOf(Math.min(...scores))];
-    return { score: scores[bestMoveIndex], index: bestMoveIndex };
-  }
+            carregarPontuacoes();
+            atualizarInterface();
 
-  function minimaxScore(cells, depth, isMaximizing) {
-    // Implemente a função de avaliação para o minimax aqui
-    // Retorna 10 se o jogador 'O' ganhar, -10 se 'X' ganhar, 0 se empate
-    // Considere a profundidade para penalizar movimentos mais longos
-    // Exemplo básico:
-    if (checkWinner()) {
-      return (currentPlayer === 'O') ? 10 - depth : -10 + depth;
-    } else if (isBoardFull()) {
-      return 0;
-    }
+            return {
+                adivinhar: adivinhar
+            };
+        }
 
-    const scores = [];
+        function atualizarPontuacao() {
+            const nome = prompt("Digite seu Nick:");
+            const pontuacaoAtual = pontuacoes[nome] || 0;
+            pontuacoes[nome] = pontuacaoAtual + 1;
+            alert("Pontuação de " + nome + ": " + pontuacoes[nome]);
+            salvarPontuacoes();
+            exibirPontuacoes();
+        }
 
-    for (let i = 0; i < cells.length; i++) {
-      if (cells[i].innerHTML === '') {
-        cells[i].innerHTML = (isMaximizing) ? 'O' : 'X';
-        const score = minimaxScore(cells, depth + 1, !isMaximizing);
-        cells[i].innerHTML = '';
+        function exibirPontuacoes() {
+            const pontuacoesList = document.getElementById("pontuacoes");
+            pontuacoesList.innerHTML = "";
 
-        scores.push(score);
-      }
-    }
+            for (const nome in pontuacoes) {
+                const pontuacaoItem = document.createElement("li");
+                pontuacaoItem.textContent = `${nome}: ${pontuacoes[nome]}`;
+                pontuacoesList.appendChild(pontuacaoItem);
+            }
+        }
 
-    return (isMaximizing) ? Math.max(...scores) : Math.min(...scores);
-  }
-
-  function checkWinner() {
-    // ... (mesmo código de verificação de vencedor)
-  }
-
-  function isBoardFull() {
-    // ... (mesmo código de verificação de tabuleiro cheio)
-  }
-
-  function updateScore() {
-    // ... (mesmo código de atualização do placar)
-  }
-
-  function resetBoard() {
-    // ... (mesmo código de reinicialização do tabuleiro)
-  }
-
-  function changeDifficulty() {
-    difficulty = document.getElementById('difficulty').value;
-    resetBoard();
-  }
-</script>
-
+        const jogo = jogarForca();
+    </script>
 </body>
 </html>
