@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +21,10 @@
     #niveis {
       margin-top: 20px;
     }
+
+    #passarNivelBtn {
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -34,6 +37,7 @@
   <h2>Jogo de Coleta de Diamantes</h2>
   <p id="timer">Tempo restante: <span id="countdown">15:00</span></p>
   <button onclick="coletarDiamante()">Coletar Diamante</button>
+  <button id="passarNivelBtn" onclick="passarProximoNivel()">Clique e Passe para o Próximo Nível</button>
   <p id="mensagem"></p>
   <p id="pontuacao">Pontuação: <span id="pontuacaoValor">0</span></p>
 
@@ -72,7 +76,7 @@
         
         // Verificar se é hora de avançar para o próximo nível
         if (recargas >= recargasPorNivel) {
-          passarProximoNivel();
+          document.getElementById('passarNivelBtn').disabled = false;
         }
       } else {
         document.getElementById('mensagem').innerText = 'Espere o cronômetro zerar para coletar novamente.';
