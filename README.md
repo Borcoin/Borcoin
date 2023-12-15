@@ -108,10 +108,11 @@
       displayScore();
       displayIncorrectGuesses();
 
+      // Salva a pontuação no localStorage a cada jogada
+      localStorage.setItem("totalScore", totalScore);
+
       if (!guessedWord.includes("_") || incorrectGuesses.length === 6) {
-        // Se o jogo terminar, salva a pontuação no localStorage
-        localStorage.setItem("totalScore", totalScore);
-        // Reinicia automaticamente após um pequeno intervalo
+        // Se o jogo terminar, reinicia automaticamente após um pequeno intervalo
         setTimeout(startGame, 2000);
       }
     }
