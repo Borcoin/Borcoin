@@ -65,10 +65,21 @@
       { word: "tokyo", hint: "A capital do Japão." }
     ];
 
-    let currentAnswer = answers[Math.floor(Math.random() * answers.length)];
-    let guessedWord = Array(currentAnswer.word.length).fill("_");
+    let currentAnswer = {};
+    let guessedWord = [];
     let incorrectGuesses = [];
     let totalScore = 0;
+
+    function startGame() {
+      currentAnswer = answers[Math.floor(Math.random() * answers.length)];
+      guessedWord = Array(currentAnswer.word.length).fill("_");
+      incorrectGuesses = [];
+      displayWord();
+      displayHint();
+      displayScore();
+      displayIncorrectGuesses();
+      renderKeyboard();
+    }
 
     function displayWord() {
       document.getElementById("word-container").innerHTML = guessedWord.join(" ");
@@ -112,7 +123,8 @@
     }
 
     function nextRound() {
-      window.location.reload();
+      document.getElementById("next-round-btn").style.display = "none";
+      startGame();
     }
 
     function renderKeyboard() {
@@ -130,11 +142,7 @@
       }
     }
 
-    displayWord();
-    displayHint();
-    displayScore();
-    displayIncorrectGuesses();
-    renderKeyboard();
+    startGame();
   </script>
 </body>
 </html>
