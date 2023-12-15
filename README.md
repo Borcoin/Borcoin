@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -39,16 +39,6 @@
       cursor: pointer;
     }
   </style>
-  <script type="text/javascript">
-	atOptions = {
-		'key' : 'f174b822b902ac519112de39d7f637ca',
-		'format' : 'iframe',
-		'height' : 250,
-		'width' : 300,
-		'params' : {}
-	};
-	document.write('<scr' + 'ipt type="text/javascript" src="//www.topcreativeformat.com/f174b822b902ac519112de39d7f637ca/invoke.js"></scr' + 'ipt>');
-</script>
 </head>
 <body>
   <h1>Jogo da Forca</h1>
@@ -59,6 +49,8 @@
   <div id="guesses-container"></div>
 
   <div id="keyboard"></div>
+
+  <button onclick="nextRound()">Próxima Rodada</button>
 
   <script>
     const answers = [
@@ -109,22 +101,16 @@
 
       if (!guessedWord.includes("_")) {
         alert(`Parabéns! Você ganhou com uma pontuação de ${totalScore} pontos!`);
-        resetGame();
+        nextRound();
       } else if (incorrectGuesses.length === 6) {
         alert(`Você perdeu! A resposta era "${currentAnswer.word}". Sua pontuação nesta rodada foi ${totalScore} pontos.`);
-        resetGame();
+        nextRound();
       }
     }
 
-    function resetGame() {
-      currentAnswer = answers[Math.floor(Math.random() * answers.length)];
-      guessedWord = Array(currentAnswer.word.length).fill("_");
-      incorrectGuesses = [];
-      displayWord();
-      displayHint();
-      displayScore();
-      displayIncorrectGuesses();
-      renderKeyboard();
+    function nextRound() {
+      // Adiciona a linha abaixo para recarregar a página automaticamente
+      window.location.reload();
     }
 
     function renderKeyboard() {
@@ -148,15 +134,5 @@
     displayIncorrectGuesses();
     renderKeyboard();
   </script>
-  <script type="text/javascript">
-	atOptions = {
-		'key' : '32a3921042f800091bb1ad96c37de5a0',
-		'format' : 'iframe',
-		'height' : 50,
-		'width' : 320,
-		'params' : {}
-	};
-	document.write('<scr' + 'ipt type="text/javascript" src="//www.topcreativeformat.com/32a3921042f800091bb1ad96c37de5a0/invoke.js"></scr' + 'ipt>');
-</script>
 </body>
 </html>
