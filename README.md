@@ -25,7 +25,7 @@
   <p id="mensagem"></p>
 
   <script>
-    let tempoRestante = 900; // 15 minutos em segundos
+    let tempoRestante = localStorage.getItem('tempoRestante') || 900; // 15 minutos em segundos
     let diamantesColetados = 0;
 
     function atualizarCronometro() {
@@ -46,6 +46,7 @@
 
     function reiniciarCronometro() {
       tempoRestante = 900; // Reiniciar para 15 minutos
+      localStorage.setItem('tempoRestante', tempoRestante);
       atualizarCronometro();
     }
 
@@ -53,6 +54,7 @@
       setInterval(function() {
         if (tempoRestante > 0) {
           tempoRestante--;
+          localStorage.setItem('tempoRestante', tempoRestante);
           atualizarCronometro();
         }
       }, 1000);
