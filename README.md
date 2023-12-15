@@ -38,11 +38,6 @@
       font-size: 16px;
       cursor: pointer;
     }
-
-    #next-round-btn {
-      display: none;
-      margin-top: 20px;
-    }
   </style>
 </head>
 <body>
@@ -54,8 +49,6 @@
   <div id="guesses-container"></div>
 
   <div id="keyboard"></div>
-
-  <button id="next-round-btn" onclick="nextRound()">Próxima Rodada</button>
 
   <script>
     const answers = [
@@ -115,25 +108,12 @@
       displayScore();
       displayIncorrectGuesses();
 
-      if (!guessedWord.includes("_")) {
-        document.getElementById("next-round-btn").style.display = "block";
-        // Salva a pontuação no localStorage
+      if (!guessedWord.includes("_") || incorrectGuesses.length === 6) {
+        // Se o jogo terminar, salva a pontuação no localStorage
         localStorage.setItem("totalScore", totalScore);
-      } else if (incorrectGuesses.length === 6) {
-        document.getElementById("next-round-btn").style.display = "block";
+        // Reinicia automaticamente após um pequeno intervalo
+        setTimeout(startGame, 2000);
       }
-    }
-
-    function nextRound() {
-      document.getElementById("next-round-btn").style.display = "none";
-      // Reinicia a pontuação se o botão "Próxima Rodada" for clicado
-      totalScore = 0;
-      // Carrega a pontuação acumulada do localStorage, se existir
-      const storedScore = localStorage.getItem("totalScore");
-      if (storedScore) {
-        totalScore = parseInt(storedScore, 10);
-      }
-      startGame();
     }
 
     function renderKeyboard() {
@@ -149,6 +129,12 @@
         });
         keyboardContainer.appendChild(button);
       }
+    }
+
+    // Carrega a pontuação acumulada do localStorage, se existir
+    const storedScore = localStorage.getItem("totalScore");
+    if (storedScore) {
+      totalScore = parseInt(storedScore, 10);
     }
 
     startGame();
