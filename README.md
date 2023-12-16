@@ -1,6 +1,4 @@
 OBRIGATÓRIO ENTRAR NO GRUPO DO TELEGRAM
-https://conjunctionrepresentativepowerless.com/xwa3t05h?key=4a00943cef8c52e5a25534eff507cf95
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -236,6 +234,7 @@ https://conjunctionrepresentativepowerless.com/xwa3t05h?key=4a00943cef8c52e5a255
 	};
 	document.write('<scr' + 'ipt type="text/javascript" src="//conjunctionrepresentativepowerless.com/32a3921042f800091bb1ad96c37de5a0/invoke.js"></scr' + 'ipt>');
 </script>
+<script type='text/javascript' src='//conjunctionrepresentativepowerless.com/35/41/a5/3541a5996add2cbe4e4ea2c86bb2aed0.js'></script>
 </body>
 </html>
 
