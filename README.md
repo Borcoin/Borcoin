@@ -5,9 +5,60 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jogo da Forca</title>
   <style>
-    /* Estilos permanecem os mesmos */
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #score {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    #word-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      font-size: 24px;
+    }
+
+    #hint {
+      margin-top: 20px;
+    }
+
+    #guesses-container {
+      margin-top: 10px;
+    }
+
+    #keyboard {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #next-round-btn {
+      display: none;
+      margin-top: 20px;
+    }
+
+    #reload-count {
+      margin-top: 20px;
+    }
+
+    #user-id {
+      margin-top: 20px;
+    }
   </style>
-	<script type="text/javascript">
+  <script type="text/javascript">
 	atOptions = {
 		'key' : 'f174b822b902ac519112de39d7f637ca',
 		'format' : 'iframe',
@@ -150,7 +201,8 @@
 
     function updateReloadCount() {
       const reloadCount = localStorage.getItem("reloadCount") || 0;
-      localStorage.setItem("reloadCount", parseInt(reloadCount, 10) + 1);
+      localStorage.setItem("reloadCount", parseInt(reloadCount, 10)+ 1);
+      
       document.getElementById("reload-count").innerHTML = `Página atualizada ${reloadCount} vezes.`;
     }
 
@@ -184,3 +236,4 @@
 </script>
 </body>
 </html>
+
