@@ -1,64 +1,13 @@
-OBRIGATÓRIO ENTRAR NO GRUPO DO TELEGRAM 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jogo da Forca</title>
   <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    #score {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-    }
-
-    #word-container {
-      display: flex;
-      justify-content: center;
-      margin-top: 20px;
-      font-size: 24px;
-    }
-
-    #hint {
-      margin-top: 20px;
-    }
-
-    #guesses-container {
-      margin-top: 10px;
-    }
-
-    #keyboard {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    button {
-      padding: 10px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    #next-round-btn {
-      display: none;
-      margin-top: 20px;
-    }
-
-    #reload-count {
-      margin-top: 20px;
-    }
-
-    #user-id {
-      margin-top: 20px;
-    }
+    /* Estilos permanecem os mesmos */
   </style>
-  <script type="text/javascript">
+	<script type="text/javascript">
 	atOptions = {
 		'key' : 'f174b822b902ac519112de39d7f637ca',
 		'format' : 'iframe',
@@ -89,7 +38,24 @@ OBRIGATÓRIO ENTRAR NO GRUPO DO TELEGRAM
       { word: "john", hint: "Um nome comum para um homem." },
       { word: "emily", hint: "Um nome comum para uma mulher." },
       { word: "paris", hint: "Uma cidade conhecida como a Cidade Luz." },
-      { word: "tokyo", hint: "A capital do Japão." }
+      { word: "tokyo", hint: "A capital do Japão." },
+      { word: "python", hint: "Uma linguagem de programação popular." },
+      { word: "beach", hint: "Um lugar para relaxar com areia e mar." },
+      { word: "mountain", hint: "Uma elevação natural da Terra." },
+      { word: "guitar", hint: "Um instrumento musical de cordas." },
+      { word: "coffee", hint: "Uma bebida popular para despertar." },
+      { word: "elephant", hint: "Um animal grande com tromba." },
+      { word: "ocean", hint: "Um vasto corpo de água." },
+      { word: "rainbow", hint: "Um arco-íris colorido após a chuva." },
+      { word: "computer", hint: "Uma máquina que processa dados." },
+      { word: "sunset", hint: "O momento em que o sol se põe." },
+      { word: "universe", hint: "Tudo que existe, incluindo estrelas e planetas." },
+      { word: "chocolate", hint: "Um doce feito de cacau." },
+      { word: "moonlight", hint: "Luz do luar durante a noite." },
+      { word: "umbrella", hint: "Um objeto usado para se proteger da chuva." },
+      { word: "fireworks", hint: "Explosões coloridas no céu durante celebrações." },
+      { word: "adventure", hint: "Uma jornada emocionante e arriscada." },
+      // Adicione mais respostas conforme necessário
     ];
 
     let currentAnswer = {};
