@@ -83,14 +83,6 @@
       { word: "maria", hint: "Um nome comum para uma mulher." },
       { word: "santos", hint: "cidade do brasil." },
       { word: "lucas", hint: "nome de homem." }
-	    { word: "mario", hint: "Um nome comum para um homem." },
-      { word: "Isabel", hint: "Um nome comum para uma mulher." },
-      { word: "Botafogo", hint: "time do brasil." },
-      { word: "palmeiras", hint: "time do Brasil." },
-	    { word: "fluminense", hint: "time do brasil." },
-      { word: "palmeiras", hint: "time do Brasil." },
-      { word: "luiza", hint: "nome de mulher." },
-      { word: "Miguel", hint: "nome de homem." }
     ];
 
     let currentAnswer = {};
