@@ -48,7 +48,7 @@
       margin-top: 20px;
     }
   </style>
-  <script type="text/javascript">
+  <script 
 	atOptions = {
 		'key' : 'dc9ac8507c959f88a12000067ba33bcd',
 		'format' : 'iframe',
