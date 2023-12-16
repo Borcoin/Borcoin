@@ -244,7 +244,7 @@ OBRIGATÓRIO ENTRAR NO GRUPO DO TELEGRAM
 <body>
   <button id="meuBotao">Ir para Outra Página</button>
 
-  <script src="seuarquivo.js"></script>
+  <script src="Página.html"></script>
 </body>
 </html>
 
