@@ -1,34 +1,71 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jogo da Forca</title>
   <style>
-    /* Estilos permanecem os mesmos */
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #score {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    #word-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      font-size: 24px;
+    }
+
+    #hint {
+      margin-top: 20px;
+    }
+
+    #guesses-container {
+      margin-top: 10px;
+    }
+
+    #keyboard {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #next-round-btn {
+      display: none;
+      margin-top: 20px;
+    }
+
+    #reload-count {
+      margin-top: 20px;
+    }
+
+    #user-id {
+      margin-top: 20px;
+    }
   </style>
-  <script type="text/javascript">
-	atOptions = {
-		'key' : 'f174b822b902ac519112de39d7f637ca',
-		'format' : 'iframe',
-		'height' : 250,
-		'width' : 300,
-		'params' : {}
-	};
-	document.write('<scr' + 'ipt type="text/javascript" src="//www.topcreativeformat.com/f174b822b902ac519112de39d7f637ca/invoke.js"></scr' + 'ipt>');
-</script>
 </head>
 <body>
   <h1>Jogo da Forca</h1>
 
   <div id="score">Pontuação Total: 0</div>
-  
   <div id="word-container"></div>
-  
   <div id="hint"></div>
-  
   <div id="guesses-container"></div>
-  
 
   <div id="keyboard"></div>
 
@@ -159,15 +196,5 @@
 
     startGame();
   </script>
-  <script type="text/javascript">
-	atOptions = {
-		'key' : '32a3921042f800091bb1ad96c37de5a0',
-		'format' : 'iframe',
-		'height' : 50,
-		'width' : 320,
-		'params' : {}
-	};
-	document.write('<scr' + 'ipt type="text/javascript" src="//www.topcreativeformat.com/32a3921042f800091bb1ad96c37de5a0/invoke.js"></scr' + 'ipt>');
-</script>
 </body>
 </html>
