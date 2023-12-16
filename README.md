@@ -1,5 +1,5 @@
 OBRIGATÓRIO ENTRAR NO GRUPO DO TELEGRAM
-https://t.me/borcoinofc
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
