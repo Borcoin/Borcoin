@@ -47,7 +47,8 @@
       margin-top: 20px;
     }
   </style>
-  <script type="text/javascript">
+</head>
+<script type="text/javascript">
 	atOptions = {
 		'key' : '32a3921042f800091bb1ad96c37de5a0',
 		'format' : 'iframe',
@@ -57,7 +58,6 @@
 	};
 	document.write('<scr' + 'ipt type="text/javascript" src="//www.topcreativeformat.com/32a3921042f800091bb1ad96c37de5a0/invoke.js"></scr' + 'ipt>');
 </script>
-</head>
 <body>
 
   <h1>Jogo da Forca</h1>
