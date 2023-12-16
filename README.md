@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -22,9 +22,13 @@
   <h1>Jogo da Forca</h1>
 
   <div id="score">Pontuação Total: 0</div>
+  
   <div id="word-container"></div>
+  
   <div id="hint"></div>
+  
   <div id="guesses-container"></div>
+  
 
   <div id="keyboard"></div>
 
