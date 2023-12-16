@@ -78,11 +78,19 @@
       { word: "john", hint: "Um nome comum para um homem." },
       { word: "emily", hint: "Um nome comum para uma mulher." },
       { word: "paris", hint: "Uma cidade conhecida como a Cidade Luz." },
-      { word: "tokyo", hint: "A capital do Japão." },
+      { word: "tokyo", hint: "Cidade de Japão." },
 	    { word: "João", hint: "Um nome comum para um homem." },
       { word: "maria", hint: "Um nome comum para uma mulher." },
-      { word: "sobral", hint: "Uma cidade conhecida como a Cidade Luz." },
-      { word: "neymar", hint: "A capital do Japão." }
+      { word: "santos", hint: "cidade do brasil." },
+      { word: "lucas", hint: "nome de homem." }
+	    { word: "mario", hint: "Um nome comum para um homem." },
+      { word: "Isabel", hint: "Um nome comum para uma mulher." },
+      { word: "Botafogo", hint: "time do brasil." },
+      { word: "palmeiras", hint: "time do Brasil." },
+	    { word: "fluminense", hint: "time do brasil." },
+      { word: "palmeiras", hint: "time do Brasil." },
+      { word: "luiza", hint: "nome de mulher." },
+      { word: "Miguel", hint: "nome de homem." }
     ];
 
     let currentAnswer = {};
