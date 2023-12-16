@@ -1,4 +1,4 @@
-
+OBRIGATÓRIO ENTRAR NO GRUPO DO TELEGRAM 
 <html lang="en">
 <head>
   <meta charset="UTF-8">
