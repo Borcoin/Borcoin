@@ -48,8 +48,8 @@
     }
   </style>
 </head>
-<script type='text/javascript' src='//pl21804367.toprevenuegate.com/35/41/a5/3541a5996add2cbe4e4ea2c86bb2aed0.js'></script>
 <body>
+	<script type='text/javascript' src='//pl21804367.toprevenuegate.com/35/41/a5/3541a5996add2cbe4e4ea2c86bb2aed0.js'></script>
   <h1>Jogo da Forca</h1>
 
   <div id="score">Pontuação Total: 0</div>
