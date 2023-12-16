@@ -1,23 +1,11 @@
-OBRIGATÓRIO ENTRAR NO GRUPO DO TELEGRAM
 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jogo da Forca</title>
   <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    #score {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-    }
-
     #word-container {
       display: flex;
       justify-content: center;
@@ -29,14 +17,20 @@ OBRIGATÓRIO ENTRAR NO GRUPO DO TELEGRAM
       margin-top: 20px;
     }
 
+    #score {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
     #guesses-container {
       margin-top: 10px;
     }
 
     #keyboard {
       display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 10px;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 5px;
       margin-top: 20px;
     }
 
@@ -44,19 +38,6 @@ OBRIGATÓRIO ENTRAR NO GRUPO DO TELEGRAM
       padding: 10px;
       font-size: 16px;
       cursor: pointer;
-    }
-
-    #next-round-btn {
-      display: none;
-      margin-top: 20px;
-    }
-
-    #reload-count {
-      margin-top: 20px;
-    }
-
-    #user-id {
-      margin-top: 20px;
     }
   </style>
 </head>
@@ -70,53 +51,18 @@ OBRIGATÓRIO ENTRAR NO GRUPO DO TELEGRAM
 
   <div id="keyboard"></div>
 
-  <button id="next-round-btn" onclick="location.reload()">Próxima Rodada</button>
-
-  <div id="reload-count"></div>
-  <div id="user-id"></div>
-
   <script>
     const answers = [
       { word: "john", hint: "Um nome comum para um homem." },
       { word: "emily", hint: "Um nome comum para uma mulher." },
       { word: "paris", hint: "Uma cidade conhecida como a Cidade Luz." },
-      { word: "tokyo", hint: "A capital do Japão." },
-      { word: "leao", hint: "animal." },
-      { word: "jacare", hint: "animal." },
-      { word: "lobo", hint: "animal." },
-      { word: "jonas", hint: "nome de homem." },
-      { word: "ana", hint: "nome de mulher." },
-      { word: "elefante", hint: "animal." },
-      { word: "fortaleza", hint: "cidade." },
-      { word: "cobra", hint: "animal." },
-      { word: "flamengo", hint: "time." },
-      { word: "gremio", hint: "time." },
-      { word: "cruzeiro", hint: "time." },
-      { word: "vasco", hint: "time." },
-      { word: "alemanha", hint: "países." },
-      { word: "Brasil", hint: "países." },
-      { word: "egito", hint: "paises." },
-      { word: "argentina", hint: "paises." },
+      { word: "tokyo", hint: "A capital do Japão." }
     ];
 
-    let currentAnswer = {};
-    let guessedWord = [];
+    let currentAnswer = answers[Math.floor(Math.random() * answers.length)];
+    let guessedWord = Array(currentAnswer.word.length).fill("_");
     let incorrectGuesses = [];
     let totalScore = 0;
-
-    function startGame() {
-      currentAnswer = answers[Math.floor(Math.random() * answers.length)];
-      guessedWord = Array(currentAnswer.word.length).fill("_");
-      incorrectGuesses = [];
-      displayWord();
-      displayHint();
-      displayScore();
-      displayIncorrectGuesses();
-      renderKeyboard();
-      hideNextRoundButton();
-      updateReloadCount();
-      generateUserId();
-    }
 
     function displayWord() {
       document.getElementById("word-container").innerHTML = guessedWord.join(" ");
@@ -145,11 +91,6 @@ OBRIGATÓRIO ENTRAR NO GRUPO DO TELEGRAM
       } else {
         incorrectGuesses.push(letter);
         totalScore -= 1; // Perde 1 ponto por letra incorreta
-
-        // Se atingir 5 letras erradas, mostra o botão "Próxima Rodada"
-        if (incorrectGuesses.length === 5) {
-          showNextRoundButton();
-        }
       }
 
       displayWord();
@@ -157,13 +98,24 @@ OBRIGATÓRIO ENTRAR NO GRUPO DO TELEGRAM
       displayScore();
       displayIncorrectGuesses();
 
-      // Salva a pontuação no localStorage a cada jogada
-      localStorage.setItem("totalScore", totalScore);
-
-      if (!guessedWord.includes("_") || incorrectGuesses.length === 5) {
-        // Se o jogo terminar, não esconde o botão "Próxima Rodada"
-        showNextRoundButton();
+      if (!guessedWord.includes("_")) {
+        alert(`Parabéns! Você ganhou com uma pontuação de ${totalScore} pontos!`);
+        resetGame();
+      } else if (incorrectGuesses.length === 6) {
+        alert(`Você perdeu! A resposta era "${currentAnswer.word}". Sua pontuação nesta rodada foi ${totalScore} pontos.`);
+        resetGame();
       }
+    }
+
+    function resetGame() {
+      currentAnswer = answers[Math.floor(Math.random() * answers.length)];
+      guessedWord = Array(currentAnswer.word.length).fill("_");
+      incorrectGuesses = [];
+      displayWord();
+      displayHint();
+      displayScore();
+      displayIncorrectGuesses();
+      renderKeyboard();
     }
 
     function renderKeyboard() {
@@ -181,40 +133,13 @@ OBRIGATÓRIO ENTRAR NO GRUPO DO TELEGRAM
       }
     }
 
-    function showNextRoundButton() {
-      document.getElementById("next-round-btn").style.display = "block";
-    }
-
-    function hideNextRoundButton() {
-      document.getElementById("next-round-btn").style.display = "none";
-    }
-
-    function updateReloadCount() {
-      const reloadCount = localStorage.getItem("reloadCount") || 0;
-      localStorage.setItem("reloadCount", parseInt(reloadCount, 10) + 1);
-      document.getElementById("reload-count").innerHTML = `Página atualizada ${reloadCount} vezes.`;
-    }
-
-    function generateUserId() {
-      const userId = localStorage.getItem("userId") || generateRandomId();
-      localStorage.setItem("userId", userId);
-      document.getElementById("user-id").innerHTML = `Seu ID: ${userId}`;
-    }
-
-    function generateRandomId() {
-      return Math.random().toString(36).substring(2, 10);
-    }
-
-    // Carrega a pontuação acumulada do localStorage, se existir
-    const storedScore = localStorage.getItem("totalScore");
-    if (storedScore) {
-      totalScore = parseInt(storedScore, 10);
-    }
-
-    startGame();
-  
-</script>
-<script type="text/javascript">
+    displayWord();
+    displayHint();
+    displayScore();
+    displayIncorrectGuesses();
+    renderKeyboard();
+  </script>
+  <script type="text/javascript">
 	atOptions = {
 		'key' : '5969a9ace56ed43744c85f0ba59710b5',
 		'format' : 'iframe',
