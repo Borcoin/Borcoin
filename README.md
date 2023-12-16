@@ -59,14 +59,6 @@ OBRIGATÓRIO ENTRAR NO GRUPO DO TELEGRAM
       margin-top: 20px;
     }
   </style>
-  <script type="text/javascript">
-	atOptions = {
-		'key' : '32a3921042f800091bb1ad96c37de5a0',
-		'format' : 'iframe',
-		'height' : 50,
-		'width' : 320,
-		'params' : {}
-	
 </head>
 <body>
   <h1>Jogo da Forca</h1>
@@ -222,5 +214,7 @@ OBRIGATÓRIO ENTRAR NO GRUPO DO TELEGRAM
     startGame();
   
 </script>
+<script async="async" data-cfasync="false" src="//pl21802601.toprevenuegate.com/78fe5a5993a8f5398059a05e9cd86e5c/invoke.js"></script>
+<div id="container-78fe5a5993a8f5398059a05e9cd86e5c"></div>
 </body>
 </html>
