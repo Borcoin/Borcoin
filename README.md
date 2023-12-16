@@ -214,7 +214,15 @@ OBRIGATÓRIO ENTRAR NO GRUPO DO TELEGRAM
     startGame();
   
 </script>
-<script async="async" data-cfasync="false" src="//pl21802601.toprevenuegate.com/78fe5a5993a8f5398059a05e9cd86e5c/invoke.js"></script>
-<div id="container-78fe5a5993a8f5398059a05e9cd86e5c"></div>
+<script type="text/javascript">
+	atOptions = {
+		'key' : '5969a9ace56ed43744c85f0ba59710b5',
+		'format' : 'iframe',
+		'height' : 60,
+		'width' : 468,
+		'params' : {}
+	};
+	document.write('<scr' + 'ipt type="text/javascript" src="//www.topcreativeformat.com/5969a9ace56ed43744c85f0ba59710b5/invoke.js"></scr' + 'ipt>');
+</script>
 </body>
 </html>
