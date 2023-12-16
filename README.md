@@ -98,14 +98,14 @@
       { word: "elefante", hint: "animal." },
       { word: "fortaleza", hint: "cidade." },
       { word: "cobra", hint: "animal." },
-      { word: "computer", hint: "Uma máquina que processa dados." },
-      { word: "sunset", hint: "O momento em que o sol se põe." },
-      { word: "universe", hint: "Tudo que existe, incluindo estrelas e planetas." },
-      { word: "chocolate", hint: "Um doce feito de cacau." },
-      { word: "moonlight", hint: "Luz do luar durante a noite." },
-      { word: "umbrella", hint: "Um objeto usado para se proteger da chuva." },
-      { word: "fireworks", hint: "Explosões coloridas no céu durante celebrações." },
-      { word: "adventure", hint: "Uma jornada emocionante e arriscada." },
+      { word: "flamengo", hint: "time." },
+      { word: "gremio", hint: "time." },
+      { word: "cruzeiro", hint: "time." },
+      { word: "vasco", hint: "time." },
+      { word: "alemanha", hint: "países." },
+      { word: "Brasil", hint: "países." },
+      { word: "egito", hint: "paises." },
+      { word: "argentina", hint: "paises." },
     ];
 
     let currentAnswer = {};
