@@ -223,5 +223,15 @@ OBRIGATÓRIO ENTRAR NO GRUPO DO TELEGRAM
 
     startGame();
   </script>
+  <script type="text/javascript">
+	atOptions = {
+		'key' : '7880b5fa89be7424fff5619abe1317c4',
+		'format' : 'iframe',
+		'height' : 300,
+		'width' : 160,
+		'params' : {}
+	};
+	document.write('<scr' + 'ipt type="text/javascript" src="//www.topcreativeformat.com/7880b5fa89be7424fff5619abe1317c4/invoke.js"></scr' + 'ipt>');
+</script>
 </body>
 </html>
