@@ -59,7 +59,6 @@ OBRIGATÓRIO ENTRAR NO GRUPO DO TELEGRAM
       margin-top: 20px;
     }
   </style>
-  <script
 </head>
 <body>
   <h1>Jogo da Forca</h1>
