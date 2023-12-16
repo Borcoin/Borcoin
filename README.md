@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -78,7 +78,11 @@
       { word: "john", hint: "Um nome comum para um homem." },
       { word: "emily", hint: "Um nome comum para uma mulher." },
       { word: "paris", hint: "Uma cidade conhecida como a Cidade Luz." },
-      { word: "tokyo", hint: "A capital do Japão." }
+      { word: "tokyo", hint: "A capital do Japão." },
+	    { word: "João", hint: "Um nome comum para um homem." },
+      { word: "maria", hint: "Um nome comum para uma mulher." },
+      { word: "sobral", hint: "Uma cidade conhecida como a Cidade Luz." },
+      { word: "neymar", hint: "A capital do Japão." }
     ];
 
     let currentAnswer = {};
