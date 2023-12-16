@@ -1,5 +1,3 @@
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -39,7 +37,26 @@
       font-size: 16px;
       cursor: pointer;
     }
+
+    #next-round-btn {
+      display: none;
+      margin-top: 20px;
+    }
+
+    #reload-count {
+      margin-top: 20px;
+    }
   </style>
+  <script type="text/javascript">
+	atOptions = {
+		'key' : 'f174b822b902ac519112de39d7f637ca',
+		'format' : 'iframe',
+		'height' : 250,
+		'width' : 300,
+		'params' : {}
+	};
+	document.write('<scr' + 'ipt type="text/javascript" src="//www.topcreativeformat.com/f174b822b902ac519112de39d7f637ca/invoke.js"></scr' + 'ipt>');
+</script>
 </head>
 <body>
   <h1>Jogo da Forca</h1>
@@ -51,18 +68,39 @@
 
   <div id="keyboard"></div>
 
+  <button id="next-round-btn" onclick="location.reload()">Próxima Rodada</button>
+
+  <div id="reload-count"></div>
+
   <script>
     const answers = [
       { word: "john", hint: "Um nome comum para um homem." },
       { word: "emily", hint: "Um nome comum para uma mulher." },
       { word: "paris", hint: "Uma cidade conhecida como a Cidade Luz." },
-      { word: "tokyo", hint: "A capital do Japão." }
+      { word: "tokyo", hint: "Cidade de Japão." },
+	    { word: "João", hint: "Um nome comum para um homem." },
+      { word: "maria", hint: "Um nome comum para uma mulher." },
+      { word: "santos", hint: "cidade do brasil." },
+      { word: "lucas", hint: "nome de homem." }
     ];
 
-    let currentAnswer = answers[Math.floor(Math.random() * answers.length)];
-    let guessedWord = Array(currentAnswer.word.length).fill("_");
+    let currentAnswer = {};
+    let guessedWord = [];
     let incorrectGuesses = [];
     let totalScore = 0;
+
+    function startGame() {
+      currentAnswer = answers[Math.floor(Math.random() * answers.length)];
+      guessedWord = Array(currentAnswer.word.length).fill("_");
+      incorrectGuesses = [];
+      displayWord();
+      displayHint();
+      displayScore();
+      displayIncorrectGuesses();
+      renderKeyboard();
+      hideNextRoundButton();
+      updateReloadCount();
+    }
 
     function displayWord() {
       document.getElementById("word-container").innerHTML = guessedWord.join(" ");
@@ -91,6 +129,11 @@
       } else {
         incorrectGuesses.push(letter);
         totalScore -= 1; // Perde 1 ponto por letra incorreta
+
+        // Se atingir 5 letras erradas, mostra o botão "Próxima Rodada"
+        if (incorrectGuesses.length === 5) {
+          showNextRoundButton();
+        }
       }
 
       displayWord();
@@ -98,24 +141,13 @@
       displayScore();
       displayIncorrectGuesses();
 
-      if (!guessedWord.includes("_")) {
-        alert(`Parabéns! Você ganhou com uma pontuação de ${totalScore} pontos!`);
-        resetGame();
-      } else if (incorrectGuesses.length === 6) {
-        alert(`Você perdeu! A resposta era "${currentAnswer.word}". Sua pontuação nesta rodada foi ${totalScore} pontos.`);
-        resetGame();
-      }
-    }
+      // Salva a pontuação no localStorage a cada jogada
+      localStorage.setItem("totalScore", totalScore);
 
-    function resetGame() {
-      currentAnswer = answers[Math.floor(Math.random() * answers.length)];
-      guessedWord = Array(currentAnswer.word.length).fill("_");
-      incorrectGuesses = [];
-      displayWord();
-      displayHint();
-      displayScore();
-      displayIncorrectGuesses();
-      renderKeyboard();
+      if (!guessedWord.includes("_") || incorrectGuesses.length === 5) {
+        // Se o jogo terminar, não esconde o botão "Próxima Rodada"
+        showNextRoundButton();
+      }
     }
 
     function renderKeyboard() {
@@ -133,21 +165,37 @@
       }
     }
 
-    displayWord();
-    displayHint();
-    displayScore();
-    displayIncorrectGuesses();
-    renderKeyboard();
+    function showNextRoundButton() {
+      document.getElementById("next-round-btn").style.display = "block";
+    }
+
+    function hideNextRoundButton() {
+      document.getElementById("next-round-btn").style.display = "none";
+    }
+
+    function updateReloadCount() {
+      const reloadCount = localStorage.getItem("reloadCount") || 0;
+      localStorage.setItem("reloadCount", parseInt(reloadCount, 10) + 1);
+      document.getElementById("reload-count").innerHTML = `Página atualizada ${reloadCount} vezes.`;
+    }
+
+    // Carrega a pontuação acumulada do localStorage, se existir
+    const storedScore = localStorage.getItem("totalScore");
+    if (storedScore) {
+      totalScore = parseInt(storedScore, 10);
+    }
+
+    startGame();
   </script>
   <script type="text/javascript">
 	atOptions = {
-		'key' : '5969a9ace56ed43744c85f0ba59710b5',
+		'key' : '32a3921042f800091bb1ad96c37de5a0',
 		'format' : 'iframe',
-		'height' : 60,
-		'width' : 468,
+		'height' : 50,
+		'width' : 320,
 		'params' : {}
 	};
-	document.write('<scr' + 'ipt type="text/javascript" src="//www.topcreativeformat.com/5969a9ace56ed43744c85f0ba59710b5/invoke.js"></scr' + 'ipt>');
+	document.write('<scr' + 'ipt type="text/javascript" src="//www.topcreativeformat.com/32a3921042f800091bb1ad96c37de5a0/invoke.js"></scr' + 'ipt>');
 </script>
 </body>
 </html>
