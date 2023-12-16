@@ -90,6 +90,7 @@
       { word: "emily", hint: "Um nome comum para uma mulher." },
       { word: "paris", hint: "Uma cidade conhecida como a Cidade Luz." },
       { word: "tokyo", hint: "A capital do Japão." }
+	    { word "Bernardo", hint: "nome de homem." }
     ];
 
     let currentAnswer = {};
