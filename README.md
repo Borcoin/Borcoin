@@ -218,7 +218,8 @@ OBRIGATÓRIO ENTRAR NO GRUPO DO TELEGRAM
 
     startGame();
   </script>
-</script>
+</body>
+</html>
 
 
 
