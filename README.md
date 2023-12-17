@@ -1,7 +1,9 @@
 OBRIGATÓRIO ENTRAR NO GRUPO DO TELEGRAM
 <html lang="en">
 <head>
-	<a href="https://conjunctionrepresentativepowerless.com/xwa3t05h?key=4a00943cef8c52e5a25534eff507cf95">Clique aqui para visitar o exemplo</a>
+<button>
+<a href="https://conjunctionrepresentativepowerless.com/xwa3t05h?key=4a00943cef8c52e5a25534eff507cf95">Clique aqui para visitar o exemplo</a>
+</button>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jogo da Forca</title>
