@@ -1,7 +1,6 @@
 OBRIGATÓRIO ENTRAR NO GRUPO DO TELEGRAM
 <html lang="en">
 <head>
-  <script type='text/javascript' src='//conjunctionrepresentativepowerless.com/21/c8/05/21c8059ac7a730f835550879cf3d7a36.js'></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jogo da Forca</title>
@@ -215,6 +214,12 @@ OBRIGATÓRIO ENTRAR NO GRUPO DO TELEGRAM
 
     startGame();
   </script>
+</body>
+
+<body>
+<header>
+<script type='text/javascript' src='//conjunctionrepresentativepowerless.com/21/c8/05/21c8059ac7a730f835550879cf3d7a36.js'></script> 
+</header>
 </body>
 </html>
 
