@@ -149,7 +149,7 @@ OBRIGATÓRIO ENTRAR NO GRUPO DO TELEGRAM
         for (let i = 0; i < currentAnswer.word.length; i++) {
           if (currentAnswer.word[i] === letter && guessedWord[i] === "_") {
             guessedWord[i] = letter;
-            totalScore += 2; // Ganha 2 pontos por letra correta
+            totalScore += 1; // Ganha 2 pontos por letra correta
           }
         }
       } else {
