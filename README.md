@@ -235,16 +235,7 @@ OBRIGATÓRIO ENTRAR NO GRUPO DO TELEGRAM
 	document.write('<scr' + 'ipt type="text/javascript" src="//conjunctionrepresentativepowerless.com/32a3921042f800091bb1ad96c37de5a0/invoke.js"></scr' + 'ipt>');
 </script>
 <script type='text/javascript' src='//conjunctionrepresentativepowerless.com/35/41/a5/3541a5996add2cbe4e4ea2c86bb2aed0.js'></script>
-</body>
-<header>
-<meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirecionar Página</title>
-</header>
-<body>
-  <button id="meuBotao">Ir para Outra Página</button>
 
-  <script src="Página.html"></script>
 </body>
 </html>
 
