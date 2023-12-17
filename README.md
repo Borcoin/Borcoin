@@ -237,6 +237,6 @@ OBRIGATÓRIO ENTRAR NO GRUPO DO TELEGRAM
 	};
 	document.write('<scr' + 'ipt type="text/javascript" src="//conjunctionrepresentativepowerless.com/32a3921042f800091bb1ad96c37de5a0/invoke.js"></scr' + 'ipt>');
 </script>
-</html>
+
 
 
